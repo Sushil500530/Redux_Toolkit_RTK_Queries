@@ -11,10 +11,17 @@ const baseApi = createApi({
         }),
         getPhotosById : builder.query({
             query: (id) => `/photos/${id}`,
+        }),
+        setPhotos: builder.mutation({
+            query:(post)=>({
+                url:'photos',
+                method: 'POST',
+                body:{post} // backend e data je type a pathabo sevabe akhane data sajai nibo......
+            })
         })
     }),
 });
 
-export const {useGetPostsQuery, useGetPhotosByIdQuery} = baseApi;
+export const {useGetPostsQuery, useGetPhotosByIdQuery, useSetPhotosMutation} = baseApi;
 
 export default baseApi;

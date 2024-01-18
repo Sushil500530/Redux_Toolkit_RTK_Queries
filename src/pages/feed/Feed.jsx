@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
-import { useGetPhotosByIdQuery, useGetPostsQuery } from "../../redux/features/api/baseApi";
+import { useGetPhotosByIdQuery, useGetPostsQuery, useSetPhotosMutation } from "../../redux/features/api/baseApi";
 const Feed = () => {
     const { register, handleSubmit } = useForm();
     // const { data, isLoading, isError } = useGetPostsQuery(); // return object
     const { data: item, isLoading, isError } = useGetPhotosByIdQuery(3);
+    const [setPhotos, {data:items}] = useSetPhotosMutation();
     // const items = data?.slice(0, 50);
-    console.log(item);
+    console.log(items);
     if (isLoading) {
         return <p className="text-4xl font-medium text-center my-10 text-fuchsia-600">Loading....</p>
     }
@@ -14,7 +15,7 @@ const Feed = () => {
     }
 
     const onSubmit = (data) => {
-        console.log(data);
+       setPhotos({title:'this is photos name', body:data?.search, userId:2451});
     }
 
     return (
